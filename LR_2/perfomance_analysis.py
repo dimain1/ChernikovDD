@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 
 
 def measure_list_realization(count):
+    """
+    Измеряет время вставки элементов в начало списка.
+    Вычисляет для list и linked_list
+    Возвращает: Кортеж из двух элементов
+    (list_time, linked_list_time )
+    """
     # Тест времени вставки для списка
     test_list = list()
     start1 = timeit.default_timer()
@@ -22,6 +28,12 @@ def measure_list_realization(count):
 
 
 def measure_queue_realization(count):
+    """
+    Измеряет время реализации очереди.
+    Вычисляет для list и deque
+    Возвращает: Кортеж из двух элементов
+    (list_time, deque_time )
+    """
     # Тест списка для реализации очереди
     test_list_queue = list()
     for i in range(count):

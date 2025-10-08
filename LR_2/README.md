@@ -136,6 +136,12 @@ import matplotlib.pyplot as plt
 
 
 def measure_list_realization(count):
+    """
+    Измеряет время вставки элементов в начало списка.
+    Вычисляет для list и linked_list
+    Возвращает: Кортеж из двух элементов 
+    (list_time, linked_list_time )
+    """
     # Тест времени вставки для списка
     test_list = list()
     start1 = timeit.default_timer()
@@ -153,6 +159,12 @@ def measure_list_realization(count):
 
 
 def measure_queue_realization(count):
+    """
+    Измеряет время реализации очереди.
+    Вычисляет для list и deque
+    Возвращает: Кортеж из двух элементов 
+    (list_time, deque_time )
+    """
     # Тест списка для реализации очереди
     test_list_queue = list()
     for i in range(count):
@@ -192,6 +204,8 @@ plt.xlabel("Количество элементов N")
 plt.ylabel("Время выполнения ms")
 plt.title("Тест времени вставки для списка")
 plt.legend(loc="upper left", title="Collections")
+plt.savefig('./time_complexity_plot_list.png',
+            dpi=300, bbox_inches='tight')
 plt.show()
 
 list_queue_measures = []
@@ -208,10 +222,12 @@ plt.xlabel("Количество элементов N")
 plt.ylabel("Время выполнения ms")
 plt.title("Тест времени реализации очереди")
 plt.legend(loc="upper left", title="Collections")
+plt.savefig('./time_complexity_plot_queue.png',
+            dpi=300, bbox_inches='tight')
 plt.show()
 
 
-#Характеристики вычислительной машины
+# Характеристики вычислительной машины
 pc_info = """
 Характеристики ПК для тестирования:
 - Процессор: Intel Core i5-12500H @ 2.50GHz
@@ -222,7 +238,6 @@ pc_info = """
 print(pc_info)
 print(f"{list_measure} - list \n {linked_list_measure} -linked_list \n"
       f"{list_queue_measures} - list \n {deque_measures} - deque")
-
 
 ```
 
