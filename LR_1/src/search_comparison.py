@@ -114,7 +114,7 @@ def plot_results(sizes, results_linear, results_binary):
     plt.legend()
     plt.grid(True)
     # plt.ticklabel_format(style='plain', axis='x')
-    plt.savefig('./time_complexity_plot.png',
+    plt.savefig('./ОТЧЁТ/time_complexity_plot.png',
                 dpi=300, bbox_inches='tight')
     plt.show()
 
@@ -128,7 +128,7 @@ def plot_results(sizes, results_linear, results_binary):
     plt.legend()
     plt.grid(True)
     # plt.ticklabel_format(style='plain', axis='x')
-    plt.savefig('./time_complexity_plot_log.png',
+    plt.savefig('./ОТЧЁТ/time_complexity_plot_log.png',
                 dpi=300, bbox_inches='tight')
     plt.show()
 
