@@ -36,9 +36,6 @@ def bracket_task(brackets):
     return balanced
 
 
-# print(bracket_task("{[()]}"))
-
-
 def printing_task(orders):
     """
     Моделирует процесс печати документов из очереди.
@@ -52,10 +49,6 @@ def printing_task(orders):
         time.sleep(2)
         print(f"{deq.popleft()} напечатано")
     print("Конец печати")
-
-
-# orders = {"Отчёт по продажам", "Дипломная работа", "Рецепт пирога"}
-# printing_task(orders)
 
 
 def palindrome_task(palindrom):
@@ -73,6 +66,3 @@ def palindrome_task(palindrom):
             is_palindrom = False
             break
     return is_palindrom
-
-
-print(palindrome_task("12332"))
