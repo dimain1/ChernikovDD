@@ -83,7 +83,7 @@ plt.ylabel('Время выполнения (мс)')
 plt.title('Зависимость времени выполнения от размера массива\nСложность: O(N)')
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 plt.legend()
-plt.savefig('./ОТЧЁТ/time_complexity_plot.png', dpi=300, bbox_inches='tight')
+plt.savefig('./report/time_complexity_plot.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 # Дополнительный анализ: сравнение с теоретической оценкой
