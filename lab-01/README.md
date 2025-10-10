@@ -179,8 +179,17 @@ print(pc_info)
 
 ```
 
-<image src="./ОТЧЁТ/time_complexity_plot.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/time_complexity_plot_log.png" style="display:block; margin: auto; height:400px">
+<image src="./report/time_complexity_plot.png" style="display:block; margin: auto; height:400px">
+<image src="./report/time_complexity_plot_log.png" style="display:block; margin: auto; height:400px">
+
+```bash
+Характеристики ПК для тестирования:
+- Процессор: Intel Core i5-12500H @ 2.50GHz
+- Оперативная память: 32 GB DDR4
+- ОС: Windows 11
+- Python: 3.12
+```
+
 <div>Линейный поиск (linear_search): теоретически O(n), время растет линейно с размером массива.
       Практически: время поиска первого элемента минимально, последнего/отсутствующего — максимально, график близок к прямой.
       Для последнего элемента требуется n сравнений.
