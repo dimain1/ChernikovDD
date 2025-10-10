@@ -67,16 +67,16 @@ def Visualization(sizes):
 
     Create_plot(random_data_measures, sizes,
                 "Сравнение методов сортировки на рандомных данных",
-                "./ОТЧЁТ/random_data_all_methods.png")
+                "./report/random_data_all_methods.png")
     Create_plot(sorted_data_measures, sizes,
                 "Сравнение методов сортировки на отсортированных данных",
-                "./ОТЧЁТ/sorted_data_all_methods.png")
+                "./report/sorted_data_all_methods.png")
     Create_plot(reversed_data_measures, sizes,
                 "Сравнение методов сортировки на реверсных данных",
-                "./ОТЧЁТ/reversed_data_all_methods.png")
+                "./report/reversed_data_all_methods.png")
     Create_plot(almost_sorted_data_measures, sizes,
                 "Сравнение методов сортировки на почти отсортированных данных",
-                "./ОТЧЁТ/almost_sorted_data_all_methods.png")
+                "./report/almost_sorted_data_all_methods.png")
 
 
 def Create_plot(data, sizes, title, path):
