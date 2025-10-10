@@ -306,8 +306,8 @@ Visualization([5, 10, 15, 20, 25, 30, 35])
 
 
 
-<image src="./ОТЧЁТ/fibonacci_comparison.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/output.png" style="display:block; margin: auto; height:400px">
+<image src="./report/fibonacci_comparison.png" style="display:block; margin: auto; height:400px">
+<image src="./report/output.png" style="display:block; margin: auto; height:400px">
 
 ## Ответы на контрольные вопросы
 

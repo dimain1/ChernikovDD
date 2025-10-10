@@ -104,7 +104,7 @@ def Visualization(sizes):
     plt.title("Сравнение времени вычисления "
               "числа Фибоначчи с мемоизацией и без")
     plt.legend(loc="upper left", title="Метод")
-    plt.savefig("ОТЧЁТ/fibonacci_comparison.png", dpi=300, bbox_inches='tight')
+    plt.savefig("report/fibonacci_comparison.png", dpi=300, bbox_inches='tight')
     plt.show()
 
     # Характеристики вычислительной машины
