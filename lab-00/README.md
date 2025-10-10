@@ -112,7 +112,7 @@ plt.ylabel('Время выполнения (мс)')
 plt.title('Зависимость времени выполнения от размера массива\nСложность: O(N)')
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 plt.legend()
-plt.savefig('./ПР_0/time_complexity_plot.png', dpi=300, bbox_inches='tight')
+plt.savefig('./report/time_complexity_plot.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 # Дополнительный анализ: сравнение с теоретической оценкой
@@ -123,6 +123,6 @@ print("3. Время на один элемент примерно постоя�
     time_per_element))
 
 ```
-<image src="./ОТЧЁТ/time_complexity_plot.png" style="height:360px; display: block; margin: 0 auto;">
-<image src="ОТЧЁТ/output.png" style="height:240px;display: block; margin: 0 auto;">
+<image src="./report/time_complexity_plot.png" style="height:360px; display: block; margin: 0 auto;">
+<image src="report/output.png" style="height:240px;display: block; margin: 0 auto;">
 
