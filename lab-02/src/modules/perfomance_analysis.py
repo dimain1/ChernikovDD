@@ -78,7 +78,7 @@ def Visualization(sizes=[100, 1000, 10000, 100000]):
     plt.ylabel("Время выполнения ms")
     plt.title("Тест времени вставки для списка")
     plt.legend(loc="upper left", title="Collections")
-    plt.savefig('./ОТЧЁТ/time_complexity_plot_list.png',
+    plt.savefig('./report/time_complexity_plot_list.png',
                 dpi=300, bbox_inches='tight')
     plt.show()
 
@@ -96,7 +96,7 @@ def Visualization(sizes=[100, 1000, 10000, 100000]):
     plt.ylabel("Время выполнения ms")
     plt.title("Тест времени реализации очереди")
     plt.legend(loc="upper left", title="Collections")
-    plt.savefig('./ОТЧЁТ/time_complexity_plot_queue.png',
+    plt.savefig('./report/time_complexity_plot_queue.png',
                 dpi=300, bbox_inches='tight')
     plt.show()
 

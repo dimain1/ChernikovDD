@@ -221,7 +221,7 @@ def Visualization(sizes=[100, 1000, 10000, 100000]):
     plt.ylabel("Время выполнения ms")
     plt.title("Тест времени вставки для списка")
     plt.legend(loc="upper left", title="Collections")
-    plt.savefig('./ОТЧЁТ/time_complexity_plot_list.png',
+    plt.savefig('./report/time_complexity_plot_list.png',
                 dpi=300, bbox_inches='tight')
     plt.show()
 
@@ -239,7 +239,7 @@ def Visualization(sizes=[100, 1000, 10000, 100000]):
     plt.ylabel("Время выполнения ms")
     plt.title("Тест времени реализации очереди")
     plt.legend(loc="upper left", title="Collections")
-    plt.savefig('./ОТЧЁТ/time_complexity_plot_queue.png',
+    plt.savefig('./report/time_complexity_plot_queue.png',
                 dpi=300, bbox_inches='tight')
     plt.show()
 
@@ -352,8 +352,29 @@ if __name__ == "__main__":
     print(ts.palindrome_task("12332"))
 ```
 
-<image src="./ОТЧЁТ/time_complexity_plot_list.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/time_complexity_plot_queue.png" style="display:block; margin: auto; height:400px">
+```bash
+    Характеристики ПК для тестирования:
+    - Процессор: Intel Core i5-12500H @ 2.50GHz
+    - Оперативная память: 32 GB DDR4
+    - ОС: Windows 11
+    - Python: 3.12
+
+[0.01379998866468668, 0.18279999494552612, 9.937399998307228, 1400.2086999826133] - list
+ [0.027600006433203816, 0.3482000029180199, 2.2190000163391232, 33.13450000132434] -linked_list
+[0.06570000550709665, 0.49249999574385583, 26.865099993301556, 1411.3209999923129] - list
+ [0.04439998883754015, 0.37910000537522137, 2.0296000002417713, 51.44469998776913] - deque
+6
+True
+Начало печати
+Дипломная работа напечатано
+Отчёт по продажам напечатано
+Рецепт пирога напечатано
+Конец печати
+False
+```
+
+<image src="./report/time_complexity_plot_list.png" style="display:block; margin: auto; height:400px">
+<image src="./report/time_complexity_plot_queue.png" style="display:block; margin: auto; height:400px">
 
 ## Ответы на контрольные вопросы
 
