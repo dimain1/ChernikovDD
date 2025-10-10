@@ -408,11 +408,11 @@ perf_test.Create_summary_table(sizes)
 ```
 
 
-<image src="./ОТЧЁТ/random_data_all_methods.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/sorted_data_all_methods.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/reversed_data_all_methods.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/almost_sorted_data_all_methods.png" style="display:block; margin: auto; height:400px">
-<image src="./ОТЧЁТ/output.png" style="display:block; margin: auto;">
+<image src="./report/random_data_all_methods.png" style="display:block; margin: auto; height:400px">
+<image src="./report/sorted_data_all_methods.png" style="display:block; margin: auto; height:400px">
+<image src="./report/reversed_data_all_methods.png" style="display:block; margin: auto; height:400px">
+<image src="./report/almost_sorted_data_all_methods.png" style="display:block; margin: auto; height:400px">
+<image src="./report/output.png" style="display:block; margin: auto;">
 
 # Анализ эффективности алгоритмов сортировки
 
