@@ -407,12 +407,103 @@ perf_test.Create_summary_table(sizes)
 
 ```
 
+```bash
+    Характеристики ПК для тестирования:
+    - Процессор: Intel Core i5-12500H @ 2.50GHz
+    - Оперативная память: 32 GB DDR4
+    - ОС: Windows 11
+    - Python: 3.12
+
+data_type     | size  | method      | time_ms    
+-------------------------------------------------
+random        | 100   | bubble sort | 0.887500
+random        | 100   | select sort | 0.318100
+random        | 100   | insert sort | 0.118000
+random        | 100   | merge sort  | 0.100300
+random        | 100   | quick sort  | 0.123200
+random        | 1000  | bubble sort | 43.948800
+random        | 1000  | select sort | 26.232100
+random        | 1000  | insert sort | 13.895900
+random        | 1000  | merge sort  | 1.059200
+random        | 1000  | quick sort  | 1.409800
+random        | 5000  | bubble sort | 1007.825300
+random        | 5000  | select sort | 370.983300
+random        | 5000  | insert sort | 386.780600
+random        | 5000  | merge sort  | 6.781700
+random        | 5000  | quick sort  | 9.354000
+random        | 10000 | bubble sort | 4129.669800
+random        | 10000 | select sort | 1351.992800
+random        | 10000 | insert sort | 1710.378900
+random        | 10000 | merge sort  | 15.633100
+random        | 10000 | quick sort  | 23.419100
+sorted        | 100   | bubble sort | 0.253100
+sorted        | 100   | select sort | 0.154600
+sorted        | 100   | insert sort | 0.009200
+sorted        | 100   | merge sort  | 0.092600
+sorted        | 100   | quick sort  | 0.082400
+sorted        | 1000  | bubble sort | 26.395600
+sorted        | 1000  | select sort | 12.506900
+sorted        | 1000  | insert sort | 0.079000
+sorted        | 1000  | merge sort  | 0.977000
+sorted        | 1000  | quick sort  | 0.880100
+sorted        | 5000  | bubble sort | 526.580600
+sorted        | 5000  | select sort | 316.926500
+sorted        | 5000  | insert sort | 0.393500
+sorted        | 5000  | merge sort  | 4.921200
+sorted        | 5000  | quick sort  | 4.311700
+sorted        | 10000 | bubble sort | 2410.782600
+sorted        | 10000 | select sort | 1454.704400
+sorted        | 10000 | insert sort | 0.767700
+sorted        | 10000 | merge sort  | 12.701700
+sorted        | 10000 | quick sort  | 10.356500
+reversed      | 100   | bubble sort | 0.269000
+reversed      | 100   | select sort | 0.164700
+reversed      | 100   | insert sort | 0.473600
+reversed      | 100   | merge sort  | 0.128400
+reversed      | 100   | quick sort  | 0.170400
+reversed      | 1000  | bubble sort | 44.018000
+reversed      | 1000  | select sort | 14.707200
+reversed      | 1000  | insert sort | 41.668100
+reversed      | 1000  | merge sort  | 1.267700
+reversed      | 1000  | quick sort  | 0.677200
+reversed      | 5000  | bubble sort | 1314.268300
+reversed      | 5000  | select sort | 449.457700
+reversed      | 5000  | insert sort | 818.359300
+reversed      | 5000  | merge sort  | 8.229200
+reversed      | 5000  | quick sort  | 5.414800
+reversed      | 10000 | bubble sort | 5413.766200
+reversed      | 10000 | select sort | 1684.056000
+reversed      | 10000 | insert sort | 3490.517200
+reversed      | 10000 | merge sort  | 15.460200
+reversed      | 10000 | quick sort  | 10.066100
+almost_sorted | 100   | bubble sort | 0.146200
+almost_sorted | 100   | select sort | 0.182100
+almost_sorted | 100   | insert sort | 0.027500
+almost_sorted | 100   | merge sort  | 0.125500
+almost_sorted | 100   | quick sort  | 0.067800
+almost_sorted | 1000  | bubble sort | 22.912000
+almost_sorted | 1000  | select sort | 15.258000
+almost_sorted | 1000  | insert sort | 1.704900
+almost_sorted | 1000  | merge sort  | 1.181400
+almost_sorted | 1000  | quick sort  | 0.718200
+almost_sorted | 5000  | bubble sort | 618.788700
+almost_sorted | 5000  | select sort | 406.144500
+almost_sorted | 5000  | insert sort | 51.530500
+almost_sorted | 5000  | merge sort  | 6.893100
+almost_sorted | 5000  | quick sort  | 5.051000
+almost_sorted | 10000 | bubble sort | 2687.900400
+almost_sorted | 10000 | select sort | 1411.839800
+almost_sorted | 10000 | insert sort | 210.462300
+almost_sorted | 10000 | merge sort  | 14.076700
+almost_sorted | 10000 | quick sort  | 10.871100
+```
+
 
 <image src="./report/random_data_all_methods.png" style="display:block; margin: auto; height:400px">
 <image src="./report/sorted_data_all_methods.png" style="display:block; margin: auto; height:400px">
 <image src="./report/reversed_data_all_methods.png" style="display:block; margin: auto; height:400px">
 <image src="./report/almost_sorted_data_all_methods.png" style="display:block; margin: auto; height:400px">
-<image src="./report/output.png" style="display:block; margin: auto;">
+
 
 # Анализ эффективности алгоритмов сортировки
 
