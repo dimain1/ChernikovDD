@@ -1,7 +1,8 @@
 import timeit
-from modules.linked_list import LinkedList
+
 from collections import deque
 import matplotlib.pyplot as plt
+from modules.linked_list import LinkedList
 
 
 def measure_list_realization(count):
@@ -111,3 +112,6 @@ def Visualization(sizes=[100, 1000, 10000, 100000]):
     print(pc_info)
     print(f"{list_measure} - list \n {linked_list_measure} -linked_list \n"
           f"{list_queue_measures} - list \n {deque_measures} - deque")
+
+
+Visualization()
