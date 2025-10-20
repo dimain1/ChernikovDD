@@ -44,7 +44,7 @@ class Node:
         next: Ссылка на следующий узел (или None).
     """
 
-    def __init__(self, value, next):
+    def __init__(self, value, next=None):
         """
         Инициализация узла.
         value: Значение узла.
@@ -63,8 +63,8 @@ class LinkedList:
     def __init__(self):
         """
         Инициализация пустого списка.
-        head: Ссылка на последний добавленный элемент (конец списка).
-        tail: Ссылка на первый элемент (начало списка).
+        head: Ссылка на первый элемент (начало списка).
+        tail: Ссылка на последний элемент (конец списка).
         """
         self.head = None
         self.tail = None
@@ -77,14 +77,12 @@ class LinkedList:
             value: Значение, которое будет храниться в новом узле.
         Время выполнения: O(1)
         """
-        if (self.head is None and self.tail is None):   # 1
-            temp = Node(value, None)    # 1
-            self.head = temp    # 1
-            self.tail = temp    # 1
+        new_node = Node(value)
+        if self.head is None:  
+            self.head = self.tail = new_node
         else:
-            temp = Node(value, self.tail)   # 1
-            self.tail = temp    # 1
-    # O(1)
+            new_node.next = self.head
+            self.head = new_node
 
     def insert_at_end(self, value):
         """
@@ -94,48 +92,41 @@ class LinkedList:
             value: Значение, которое будет храниться в новом узле.
         Время выполнения: O(1)
         """
-        if (self.head is None and self.tail is None):   # 1
-            temp = Node(value, None)    # 1
-            self.head = temp    # 1
-            self.tail = temp    # 1
+        new_node = Node(value)
+        if self.head is None:  
+            self.head = self.tail = new_node
         else:
-            temp = Node(value, None)    # 1
-            self.head.next = temp   # 1
-            self.head = temp    # 1
-    # O(1)
+            self.tail.next = new_node
+            self.tail = new_node
 
     def delete_from_start(self):
         """
-        Удаляет элемент из начала (tail) односвязного списка.
+        Удаляет элемент из начала (head) односвязного списка.
         Если список пуст, возбуждается исключение.
         Время выполнения: O(1)
         """
-        if (self.head is None):  # 1
-            raise Exception("Linked_List empty")    # 1
-        elif (self.head == self.tail):  # 1
-            self.head = None    # 1
-            self.tail = None    # 1
-        else:
-            self.tail = self.tail.next  # 1
-    # O(1)
+        if self.head is None:
+            raise Exception("LinkedList empty")
+        self.head = self.head.next
+        if self.head is None:  
+            self.tail = None
 
     def traversal(self):
         """
-        Обходит односвязный список с начала (tail) до конца (head)
+        Обходит односвязный список с начала (head) до конца (tail)
         и выводит значения элементов.
         Если список пуст, выводит сообщение.
         Время выполнения: O(N)
         """
-        if (self.head is None):  # 1
-            print("Linked_List empty")  # 1
-        else:
-            current = self.tail  # 1
-            while (True):   # O(N)
-                print(current.value)    # 1
-                if (current.next is None):  # 1
-                    break
-                current = current.next  # 1
-    # O(N)
+        if self.head is None:
+            print("LinkedList empty")
+            return
+
+        current = self.head
+        while current:
+            print(current.value)
+            current = current.next
+
 ```
 
 ```PYTHON
