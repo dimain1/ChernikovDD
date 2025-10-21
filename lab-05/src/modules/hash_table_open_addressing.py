@@ -1,4 +1,4 @@
-# hash_table_open_addressing
+# hash_table_open_addressing.py
 
 from modules.hash_functions import polynomial_hash, djb2_hash
 # from src.modules.hash_functions import polynomial_hash, djb2_hash

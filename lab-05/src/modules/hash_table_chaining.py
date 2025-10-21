@@ -1,4 +1,4 @@
-# hash_table_chaining
+# hash_table_chaining.py
 
 from modules.hash_functions import polynomial_hash
 # from src.modules.hash_functions import polynomial_hash  # by test
