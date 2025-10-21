@@ -41,6 +41,8 @@ def simple_hash(str):
     for i in str:
         sum += ord(i)
     return sum
+    # Временная сложность: O(n) — нужно пройти по всем символам строки
+
 
 
 def polynomial_hash(str, p=37, mod=10**9 + 7):
@@ -60,6 +62,8 @@ def polynomial_hash(str, p=37, mod=10**9 + 7):
         hash_value = (hash_value + char_code * p_pow) % mod
         p_pow = (p_pow * p) % mod
     return hash_value
+    # Временная сложность: O(n) — один проход по символам
+
 
 
 def djb2_hash(str):
@@ -75,6 +79,9 @@ def djb2_hash(str):
         hash_value = ((hash_value << 5) + hash_value) + \
             ord(i)  # hash * 33 = (2^5 + 1(hash)) + ord(i)
     return hash_value & 0xFFFFFFFF  # для ограничения 32-битного числа
+    # Временная сложность: O(n) — один проход по символам
+
+
 ```
 
 ```PYTHON
@@ -132,6 +139,9 @@ class Chaining_HashTable:
             while current:
                 self.insert(current.key, current.value)
                 current = current.next
+    # Временная сложность: O(n) — перераспределение всех элементов
+    # Пространственная сложность: O(1) — перераспределение
+    # происходит in-place
 
     def _shrink(self):
         """
@@ -147,6 +157,9 @@ class Chaining_HashTable:
             while current:
                 self.insert(current.key, current.value)
                 current = current.next
+    # Временная сложность: O(n) — перераспределение всех элементов
+    # Пространственная сложность: O(1) — используется константное
+    # дополнительное пространство
 
     def insert(self, key, value):
         """
@@ -170,6 +183,9 @@ class Chaining_HashTable:
         new_node.next = head
         self.table[index] = new_node
         self.count += 1
+    # Временная сложность: среднее O(1), худшее O(n)
+    # при длинной цепочке или при resize
+    # Пространственная сложность: O(1) — добавляется один узел
 
     def get(self, key):
         """
@@ -186,6 +202,8 @@ class Chaining_HashTable:
                 return current.value
             current = current.next
         return None
+        # Временная сложность: среднее O(1), худшее O(n) при коллизиях
+        # Пространственная сложность: O(1)
 
     def remove(self, key):
         """
@@ -211,6 +229,8 @@ class Chaining_HashTable:
             prev = current
             current = current.next
         return False
+        # Временная сложность: среднее O(1), худшее O(n) при длинной цепочке
+        # Пространственная сложность: O(1)
 
     def display(self):
         """
@@ -224,6 +244,8 @@ class Chaining_HashTable:
                 print(f"({current.key}: {current.value})", end=" -> ")
                 current = current.next
             print("None")
+
+
 ```
 
 ```PYTHON
@@ -274,6 +296,10 @@ class Linear_HashTable:
         if for_insert:
             return index
         return None
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
+        # Временная сложность: среднее O(1), худшее O(n) при полной таблице
+        # Пространственная сложность: O(1)
 
     def insert(self, key, value):
         """
@@ -289,6 +315,8 @@ class Linear_HashTable:
         if self.table[index] is None:
             self.count += 1
         self.table[index] = (key, value)
+        # Временная сложность: среднее O(1), худшее O(n) при долгой цепочке
+        # Пространственная сложность: O(1)
 
     def get(self, key):
         """
@@ -302,6 +330,8 @@ class Linear_HashTable:
         if index is not None:
             return self.table[index][1]
         return None
+        # Временная сложность: среднее O(1), худшее O(n) при коллизиях
+        # Пространственная сложность: O(1)
 
     def remove(self, key):
         """
@@ -318,6 +348,8 @@ class Linear_HashTable:
             self._rehash(index)
             return True
         return False
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def _rehash(self, empty_index):
         """
@@ -332,6 +364,8 @@ class Linear_HashTable:
             self.count -= 1
             self.insert(key, value)
             index = (index + 1) % self.size
+        # Временная сложность: O(n) в худшем случае (перехеширование цепочки)
+        # Пространственная сложность: O(1)
 
     def _resize(self):
         """
@@ -344,6 +378,8 @@ class Linear_HashTable:
         for item in old_table:
             if item is not None:
                 self.insert(*item)
+        # Временная сложность: O(n) — перераспределение всех элементов
+        # Пространственная сложность: O(1)
 
     def display(self):
         """
@@ -355,6 +391,8 @@ class Linear_HashTable:
                 print(f"{i}) {None}")
             else:
                 print(f"{i}) {self.table[i][0]}: {self.table[i][1]}")
+        # Временная сложность: O(n) — проход по всей таблице
+        # Пространственная сложность: O(1)
 
 
 def next_prime(n):
@@ -431,6 +469,8 @@ class DoubleHashingHashTable:
         if self.table[index] is None:
             self.count += 1
         self.table[index] = (key, value)
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def get(self, key):
         """
@@ -440,6 +480,8 @@ class DoubleHashingHashTable:
         if index is not None:
             return self.table[index][1]
         return None
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def remove(self, key):
         """
@@ -452,6 +494,8 @@ class DoubleHashingHashTable:
             self._rehash()
             return True
         return False
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def _rehash(self):
         """
@@ -464,11 +508,13 @@ class DoubleHashingHashTable:
             if item is not None:
                 key, value = item
                 self.insert(key, value)
+        # Временная сложность: O(n) — восстановление всех элементов
+        # Пространственная сложность: O(1)
 
     def _resize(self):
         """
-        Увеличивает размер таблицы до следующего простого 
-        числа и перераспределяет все элементы.
+        Увеличивает размер таблицы до следующего простого числа
+        и перераспределяет все элементы.
         """
         old_table = self.table
         self.size = next_prime(self.size * 2)
@@ -477,6 +523,8 @@ class DoubleHashingHashTable:
         for item in old_table:
             if item is not None:
                 self.insert(*item)
+        # Временная сложность: O(n) — перераспределение всех элементов
+        # Пространственная сложность: O(1)
 
     def display(self):
         """
@@ -487,6 +535,8 @@ class DoubleHashingHashTable:
                 print(f"{i}) {None}")
             else:
                 print(f"{i}) {self.table[i][0]}: {self.table[i][1]}")
+
+
 ```
 
 ```PYTHON

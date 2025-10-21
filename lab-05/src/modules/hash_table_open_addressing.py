@@ -45,6 +45,10 @@ class Linear_HashTable:
         if for_insert:
             return index
         return None
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
+        # Временная сложность: среднее O(1), худшее O(n) при полной таблице
+        # Пространственная сложность: O(1)
 
     def insert(self, key, value):
         """
@@ -60,6 +64,8 @@ class Linear_HashTable:
         if self.table[index] is None:
             self.count += 1
         self.table[index] = (key, value)
+        # Временная сложность: среднее O(1), худшее O(n) при долгой цепочке
+        # Пространственная сложность: O(1)
 
     def get(self, key):
         """
@@ -73,6 +79,8 @@ class Linear_HashTable:
         if index is not None:
             return self.table[index][1]
         return None
+        # Временная сложность: среднее O(1), худшее O(n) при коллизиях
+        # Пространственная сложность: O(1)
 
     def remove(self, key):
         """
@@ -89,6 +97,8 @@ class Linear_HashTable:
             self._rehash(index)
             return True
         return False
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def _rehash(self, empty_index):
         """
@@ -103,6 +113,8 @@ class Linear_HashTable:
             self.count -= 1
             self.insert(key, value)
             index = (index + 1) % self.size
+        # Временная сложность: O(n) в худшем случае (перехеширование цепочки)
+        # Пространственная сложность: O(1)
 
     def _resize(self):
         """
@@ -115,6 +127,8 @@ class Linear_HashTable:
         for item in old_table:
             if item is not None:
                 self.insert(*item)
+        # Временная сложность: O(n) — перераспределение всех элементов
+        # Пространственная сложность: O(1)
 
     def display(self):
         """
@@ -126,6 +140,8 @@ class Linear_HashTable:
                 print(f"{i}) {None}")
             else:
                 print(f"{i}) {self.table[i][0]}: {self.table[i][1]}")
+        # Временная сложность: O(n) — проход по всей таблице
+        # Пространственная сложность: O(1)
 
 
 def next_prime(n):
@@ -202,6 +218,8 @@ class DoubleHashingHashTable:
         if self.table[index] is None:
             self.count += 1
         self.table[index] = (key, value)
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def get(self, key):
         """
@@ -211,6 +229,8 @@ class DoubleHashingHashTable:
         if index is not None:
             return self.table[index][1]
         return None
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def remove(self, key):
         """
@@ -223,6 +243,8 @@ class DoubleHashingHashTable:
             self._rehash()
             return True
         return False
+        # Временная сложность: среднее O(1), худшее O(n)
+        # Пространственная сложность: O(1)
 
     def _rehash(self):
         """
@@ -235,11 +257,13 @@ class DoubleHashingHashTable:
             if item is not None:
                 key, value = item
                 self.insert(key, value)
+        # Временная сложность: O(n) — восстановление всех элементов
+        # Пространственная сложность: O(1)
 
     def _resize(self):
         """
-        Увеличивает размер таблицы до следующего простого 
-        числа и перераспределяет все элементы.
+        Увеличивает размер таблицы до следующего простого числа
+        и перераспределяет все элементы.
         """
         old_table = self.table
         self.size = next_prime(self.size * 2)
@@ -248,6 +272,8 @@ class DoubleHashingHashTable:
         for item in old_table:
             if item is not None:
                 self.insert(*item)
+        # Временная сложность: O(n) — перераспределение всех элементов
+        # Пространственная сложность: O(1)
 
     def display(self):
         """
@@ -258,3 +284,4 @@ class DoubleHashingHashTable:
                 print(f"{i}) {None}")
             else:
                 print(f"{i}) {self.table[i][0]}: {self.table[i][1]}")
+

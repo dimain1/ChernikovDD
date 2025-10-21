@@ -13,6 +13,8 @@ def simple_hash(str):
     for i in str:
         sum += ord(i)
     return sum
+    # Временная сложность: O(n) — нужно пройти по всем символам строки
+
 
 
 def polynomial_hash(str, p=37, mod=10**9 + 7):
@@ -32,6 +34,8 @@ def polynomial_hash(str, p=37, mod=10**9 + 7):
         hash_value = (hash_value + char_code * p_pow) % mod
         p_pow = (p_pow * p) % mod
     return hash_value
+    # Временная сложность: O(n) — один проход по символам
+
 
 
 def djb2_hash(str):
@@ -47,3 +51,5 @@ def djb2_hash(str):
         hash_value = ((hash_value << 5) + hash_value) + \
             ord(i)  # hash * 33 = (2^5 + 1(hash)) + ord(i)
     return hash_value & 0xFFFFFFFF  # для ограничения 32-битного числа
+    # Временная сложность: O(n) — один проход по символам
+

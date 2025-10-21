@@ -52,6 +52,9 @@ class Chaining_HashTable:
             while current:
                 self.insert(current.key, current.value)
                 current = current.next
+    # Временная сложность: O(n) — перераспределение всех элементов
+    # Пространственная сложность: O(1) — перераспределение
+    # происходит in-place
 
     def _shrink(self):
         """
@@ -67,6 +70,9 @@ class Chaining_HashTable:
             while current:
                 self.insert(current.key, current.value)
                 current = current.next
+    # Временная сложность: O(n) — перераспределение всех элементов
+    # Пространственная сложность: O(1) — используется константное
+    # дополнительное пространство
 
     def insert(self, key, value):
         """
@@ -90,6 +96,9 @@ class Chaining_HashTable:
         new_node.next = head
         self.table[index] = new_node
         self.count += 1
+    # Временная сложность: среднее O(1), худшее O(n)
+    # при длинной цепочке или при resize
+    # Пространственная сложность: O(1) — добавляется один узел
 
     def get(self, key):
         """
@@ -106,6 +115,8 @@ class Chaining_HashTable:
                 return current.value
             current = current.next
         return None
+        # Временная сложность: среднее O(1), худшее O(n) при коллизиях
+        # Пространственная сложность: O(1)
 
     def remove(self, key):
         """
@@ -131,6 +142,8 @@ class Chaining_HashTable:
             prev = current
             current = current.next
         return False
+        # Временная сложность: среднее O(1), худшее O(n) при длинной цепочке
+        # Пространственная сложность: O(1)
 
     def display(self):
         """
@@ -144,3 +157,4 @@ class Chaining_HashTable:
                 print(f"({current.key}: {current.value})", end=" -> ")
                 current = current.next
             print("None")
+
