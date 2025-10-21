@@ -1,3 +1,5 @@
+# main.py
+
 import modules.perfomance_analysis as perf_test
 from modules.hash_functions import simple_hash, polynomial_hash, djb2_hash
 import modules.HistCollision as hist
