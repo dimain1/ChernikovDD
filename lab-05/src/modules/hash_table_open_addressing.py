@@ -4,7 +4,7 @@ from modules.hash_functions import polynomial_hash, djb2_hash
 # from src.modules.hash_functions import polynomial_hash, djb2_hash
 
 
-class Linear_HashTable:
+class LinearHashTable:
     """
     Класс хеш-таблицы с открытой адресацией и линейным пробированием.
     Поддерживает вставку, поиск и удаление элементов.
@@ -13,8 +13,11 @@ class Linear_HashTable:
     def __init__(self, size=8, load=0.7, hash_func=polynomial_hash):
         """
         Инициализация хеш-таблицы.
+
         Args:
-            size: Начальный размер таблицы.
+            initial_size : Начальный размер внутреннего массива;
+            load : Порог коэффициента заполнения.
+            hash_func : Функция хеширования.
         """
         self.size = size
         self.table = [None] * size
@@ -30,9 +33,11 @@ class Linear_HashTable:
             for_insert: Если True, ищем первую свободную ячейку или
                         ячейку с этим ключом;
                         если False, ищем существующий ключ.
+
         Returns:
             Индекс найденной ячейки или None,
             если ключ не найден (for_insert=False).
+
         """
         index = self._hash(key) % self.size
         start_index = index
@@ -46,8 +51,6 @@ class Linear_HashTable:
             return index
         return None
         # Временная сложность: среднее O(1), худшее O(n)
-        # Пространственная сложность: O(1)
-        # Временная сложность: среднее O(1), худшее O(n) при полной таблице
         # Пространственная сложность: O(1)
 
     def insert(self, key, value):
@@ -103,6 +106,7 @@ class Linear_HashTable:
     def _rehash(self, empty_index):
         """
         Перехеширование элементов после удаления для линейного пробирования.
+
         Args:
             empty_index: Индекс только что освободившейся ячейки.
         """
@@ -145,7 +149,15 @@ class Linear_HashTable:
 
 
 def next_prime(n):
-    """Возвращает простое число >= n"""
+    """
+    Возвращает простое число >= n.
+
+    Args:
+        n: число больше которого выбирают простое.
+
+    Returns:
+        n: Возвращает простое число большее n
+    """
     def is_prime(num):
         if num < 2:
             return False
@@ -174,7 +186,10 @@ class DoubleHashingHashTable:
         """
         Инициализация хеш-таблицы.
         Args:
-            size: Начальный размер таблицы.
+            initial_size : Начальный размер внутреннего массива;
+            load : Порог коэффициента заполнения.
+            hash_func1 : Функция хеширования значений.
+            hash_func2 : Функция хеширования шага пробирования
         """
         self.size = next_prime(size)  # размер таблицы — простое число
         self.table = [None] * self.size
@@ -186,6 +201,10 @@ class DoubleHashingHashTable:
     def _probe(self, key, for_insert=False):
         """
         Двойное хеширование для поиска индекса ключа или свободной ячейки.
+
+        Args:
+            key: Ключ значения.
+            for_insert: Переменная-флаг на вставку.
         """
         index = self._hash1(key) % self.size
 
@@ -210,6 +229,10 @@ class DoubleHashingHashTable:
         """
         Вставляет элемент с ключом и значением в таблицу.
         Если ключ уже существует, обновляет значение.
+
+        Args:
+            key: Ключ значения для вставки
+            value: Значение для вставки
         """
         if self.count >= self.size * self.load:
             self._resize()
@@ -224,6 +247,9 @@ class DoubleHashingHashTable:
     def get(self, key):
         """
         Возвращает значение элемента по ключу.
+
+        Args:
+            key: ключ значения для получения
         """
         index = self._probe(key)
         if index is not None:
@@ -235,6 +261,9 @@ class DoubleHashingHashTable:
     def remove(self, key):
         """
         Удаляет элемент по ключу и полностью перехеширует таблицу.
+
+        Args:
+            key: Ключ значения для удаления.
         """
         index = self._probe(key)
         if index is not None:
@@ -284,4 +313,3 @@ class DoubleHashingHashTable:
                 print(f"{i}) {None}")
             else:
                 print(f"{i}) {self.table[i][0]}: {self.table[i][1]}")
-

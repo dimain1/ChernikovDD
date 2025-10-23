@@ -31,9 +31,11 @@
 def simple_hash(str):
     """
     Вычисляет хеш для строки.
+
     Args:
         str: Входная строка.
         len: длина массива.
+
     Returns:
         Значение хеша строки.
     """
@@ -44,14 +46,15 @@ def simple_hash(str):
     # Временная сложность: O(n) — нужно пройти по всем символам строки
 
 
-
 def polynomial_hash(str, p=37, mod=10**9 + 7):
     """
     Вычисляет полиномиальный хеш для строки.
+
     Args:
         str: Входная строка.
         p: Простое число (основание хеша).
         mod: Большое число (модуль хеширования).
+
     Returns:
         Значение хеша строки.
     """
@@ -65,12 +68,13 @@ def polynomial_hash(str, p=37, mod=10**9 + 7):
     # Временная сложность: O(n) — один проход по символам
 
 
-
 def djb2_hash(str):
     """
     Вычисляет DJB2 хеш для строки.
+
     Args:
         str: Входная строка.
+
     Returns:
         Значение хеша строки.
     """
@@ -80,7 +84,6 @@ def djb2_hash(str):
             ord(i)  # hash * 33 = (2^5 + 1(hash)) + ord(i)
     return hash_value & 0xFFFFFFFF  # для ограничения 32-битного числа
     # Временная сложность: O(n) — один проход по символам
-
 
 ```
 
@@ -94,6 +97,7 @@ from modules.hash_functions import polynomial_hash
 class Node:
     """
     Класс узла односвязного списка.
+
     Attributes:
         key: Ключ элемента.
         value: Значение элемента.
@@ -106,17 +110,22 @@ class Node:
         self.next = None
 
 
-class Chaining_HashTable:
+class ChainingHashTable:
     """
     Класс хеш-таблицы методом цепочек с динамическим масштабированием.
     Поддерживает вставку, поиск и удаление элементов.
+
+
     """
 
     def __init__(self, initial_size=8, load=0.7, hash_func=polynomial_hash):
         """
         Инициализация хеш-таблицы.
-        Args:
-            initial_size: Начальный размер таблицы.
+
+         Args:
+            initial_size : Начальный размер внутреннего массива;
+            load : Порог коэффициента заполнения.
+            hash_func : Функция хеширования.
         """
         self.size = initial_size
         self.count = 0
@@ -168,6 +177,9 @@ class Chaining_HashTable:
         Args:
             key: Ключ элемента.
             value: Значение элемента.
+
+        Returns:
+            None
         """
         if self.count / self.size > self.load:
             self._resize()
@@ -208,8 +220,10 @@ class Chaining_HashTable:
     def remove(self, key):
         """
         Удаляет элемент по ключу.
+
         Args:
             key: Ключ элемента для удаления.
+
         Returns:
             True, если элемент удалён, иначе False.
         """
@@ -245,7 +259,6 @@ class Chaining_HashTable:
                 current = current.next
             print("None")
 
-
 ```
 
 ```PYTHON
@@ -255,7 +268,7 @@ from modules.hash_functions import polynomial_hash, djb2_hash
 # from src.modules.hash_functions import polynomial_hash, djb2_hash
 
 
-class Linear_HashTable:
+class LinearHashTable:
     """
     Класс хеш-таблицы с открытой адресацией и линейным пробированием.
     Поддерживает вставку, поиск и удаление элементов.
@@ -264,8 +277,11 @@ class Linear_HashTable:
     def __init__(self, size=8, load=0.7, hash_func=polynomial_hash):
         """
         Инициализация хеш-таблицы.
+
         Args:
-            size: Начальный размер таблицы.
+            initial_size : Начальный размер внутреннего массива;
+            load : Порог коэффициента заполнения.
+            hash_func : Функция хеширования.
         """
         self.size = size
         self.table = [None] * size
@@ -281,9 +297,11 @@ class Linear_HashTable:
             for_insert: Если True, ищем первую свободную ячейку или
                         ячейку с этим ключом;
                         если False, ищем существующий ключ.
+
         Returns:
             Индекс найденной ячейки или None,
             если ключ не найден (for_insert=False).
+
         """
         index = self._hash(key) % self.size
         start_index = index
@@ -297,8 +315,6 @@ class Linear_HashTable:
             return index
         return None
         # Временная сложность: среднее O(1), худшее O(n)
-        # Пространственная сложность: O(1)
-        # Временная сложность: среднее O(1), худшее O(n) при полной таблице
         # Пространственная сложность: O(1)
 
     def insert(self, key, value):
@@ -354,6 +370,7 @@ class Linear_HashTable:
     def _rehash(self, empty_index):
         """
         Перехеширование элементов после удаления для линейного пробирования.
+
         Args:
             empty_index: Индекс только что освободившейся ячейки.
         """
@@ -396,7 +413,15 @@ class Linear_HashTable:
 
 
 def next_prime(n):
-    """Возвращает простое число >= n"""
+    """
+    Возвращает простое число >= n.
+
+    Args:
+        n: число больше которого выбирают простое.
+
+    Returns:
+        n: Возвращает простое число большее n
+    """
     def is_prime(num):
         if num < 2:
             return False
@@ -425,7 +450,10 @@ class DoubleHashingHashTable:
         """
         Инициализация хеш-таблицы.
         Args:
-            size: Начальный размер таблицы.
+            initial_size : Начальный размер внутреннего массива;
+            load : Порог коэффициента заполнения.
+            hash_func1 : Функция хеширования значений.
+            hash_func2 : Функция хеширования шага пробирования
         """
         self.size = next_prime(size)  # размер таблицы — простое число
         self.table = [None] * self.size
@@ -437,6 +465,10 @@ class DoubleHashingHashTable:
     def _probe(self, key, for_insert=False):
         """
         Двойное хеширование для поиска индекса ключа или свободной ячейки.
+
+        Args:
+            key: Ключ значения.
+            for_insert: Переменная-флаг на вставку.
         """
         index = self._hash1(key) % self.size
 
@@ -461,6 +493,10 @@ class DoubleHashingHashTable:
         """
         Вставляет элемент с ключом и значением в таблицу.
         Если ключ уже существует, обновляет значение.
+
+        Args:
+            key: Ключ значения для вставки
+            value: Значение для вставки
         """
         if self.count >= self.size * self.load:
             self._resize()
@@ -475,6 +511,9 @@ class DoubleHashingHashTable:
     def get(self, key):
         """
         Возвращает значение элемента по ключу.
+
+        Args:
+            key: ключ значения для получения
         """
         index = self._probe(key)
         if index is not None:
@@ -486,6 +525,9 @@ class DoubleHashingHashTable:
     def remove(self, key):
         """
         Удаляет элемент по ключу и полностью перехеширует таблицу.
+
+        Args:
+            key: Ключ значения для удаления.
         """
         index = self._probe(key)
         if index is not None:
@@ -536,7 +578,6 @@ class DoubleHashingHashTable:
             else:
                 print(f"{i}) {self.table[i][0]}: {self.table[i][1]}")
 
-
 ```
 
 ```PYTHON
@@ -545,7 +586,7 @@ class DoubleHashingHashTable:
 import random
 import string
 import matplotlib.pyplot as plt
-from modules.hash_functions import simple_hash, polynomial_hash, djb2_hash
+from modules.hash_functions import djb2_hash
 
 
 class ChainHashTableByCollision:
@@ -554,6 +595,7 @@ class ChainHashTableByCollision:
     цепочек под посчёт распределения
     колизий
     """
+
     def __init__(self, size=100, hash_func=djb2_hash):
         self.size = size
         self.table = [[] for _ in range(size)]
@@ -561,6 +603,14 @@ class ChainHashTableByCollision:
         self._hash = hash_func
 
     def insert(self, key):
+        """
+        Вставляет элемент с ключом и значением в таблицу.
+        Если ключ уже существует, обновляет значение.
+
+        Args:
+            key: Ключ значения для вставки
+            value: Значение для вставки
+        """
         index = self._hash(key) % self.size
         chain = self.table[index]
         if len(chain) > 0:
@@ -570,6 +620,9 @@ class ChainHashTableByCollision:
             self._resize()
 
     def _resize(self):
+        """
+        Увеличивает размер внутренней таблицы и перераспределяет ключи.
+        """
         old_table = self.table
         self.size *= 2
         self.table = [[] for _ in range(self.size)]
@@ -584,6 +637,7 @@ class LinearProbingHashTableByCollision:
     адресации с линейной пробацией под посчёт распределения
     колизий
     """
+
     def __init__(self, size=100, hash_func=djb2_hash):
         self.size = size
         self.table = [None] * size
@@ -591,6 +645,13 @@ class LinearProbingHashTableByCollision:
         self._hash = hash_func
 
     def insert(self, key):
+        """
+        Вставляет ключ в таблицу с линейным пробированием.
+        При столкновении считает количество шагов до свободной ячейки.
+
+        Args:
+            key: Ключ (строка) для вставки.
+        """
         index = self._hash(key) % self.size
         start = index
         steps = 0
@@ -605,7 +666,15 @@ class LinearProbingHashTableByCollision:
 
 
 def next_prime(n):
-    """Возвращает простое число больше n"""
+    """
+    Возвращает простое число >= n.
+
+    Args:
+        n: число больше которого выбирают простое.
+
+    Returns:
+        n: Возвращает простое число большее n
+    """
     def is_prime(num):
         if num < 2:
             return False
@@ -629,6 +698,7 @@ class DoubleHashingHashTableByCollision:
     адресации с двойным хешированием под посчёт распределения
     колизий
     """
+
     def __init__(self, size=100, hash_func1=djb2_hash,
                  hash_func2=djb2_hash):
         self.size = next_prime(size)
@@ -638,6 +708,14 @@ class DoubleHashingHashTableByCollision:
         self._hash2 = hash_func2
 
     def insert(self, key):
+        """
+        Вставляет ключ в таблицу с двойным хешированием.
+        Использует вторую хеш-функцию для вычисления шага пробирования.
+        При коллизиях фиксирует число шагов до свободной ячейки.
+
+        Args:
+            key: Ключ (строка) для вставки.
+        """
         checked_ind = []
         index = self._hash1(key) % self.size
 
@@ -661,6 +739,12 @@ class DoubleHashingHashTableByCollision:
 def generate_random_string_loop(length):
     """
     Генерирует рандомную строку длины length
+
+    Args:
+        length: длина строки для генерации
+
+    Returns:
+        random_string: Сгенерированная строка
     """
     characters = string.ascii_letters + string.digits
     random_string = ""
@@ -669,10 +753,15 @@ def generate_random_string_loop(length):
     return random_string
 
 
-def Visualisation(hash_func, N=2000, func_name="table"):
+def visualisation(hash_func, N=2000, func_name="table"):
     """
     Собирает данные по распределению колизий и вызывает
     функцию по созданию графиков
+
+    Args:
+        hash_func: Хеш функция для которой производится замер
+        N: Размер хеш-таблиц и количество элементов
+        func_name: Наименование функции для графика
     """
 
     keys = [generate_random_string_loop(10) for _ in range(N)]
@@ -696,6 +785,10 @@ def create_plot(data, path):
     """
     Создаёт рисунок по пути path, на котором изображены 3 графика
     зависимости распределения колизий от хеш-функции
+
+    Args:
+        data: Списко колизий для постройки гистограммы
+        path: Путь для сохранения графика
     """
     plt.figure(figsize=(14, 5))
 
@@ -718,6 +811,7 @@ def create_plot(data, path):
     plt.tight_layout()
     plt.savefig(path)
     plt.show()
+
 ```
 
 <image src="./report/Simple.png" style="display:block; margin: auto; ">
@@ -730,8 +824,8 @@ def create_plot(data, path):
 ```PYTHON
 # perfomance_analysis.py
 
-from modules.hash_table_chaining import Chaining_HashTable
-from modules.hash_table_open_addressing import Linear_HashTable
+from modules.hash_table_chaining import ChainingHashTable
+from modules.hash_table_open_addressing import LinearHashTable
 from modules.hash_table_open_addressing import DoubleHashingHashTable
 import random
 import string
@@ -742,6 +836,12 @@ import matplotlib.pyplot as plt
 def generate_random_string_loop(length):
     """
     Генерирует рандомную строку длины length
+
+    Args:
+        length: длина строки для генерации
+
+    Returns:
+        random_string: Сгенерированная строка
     """
     characters = string.ascii_letters + string.digits
     random_string = ""
@@ -752,40 +852,67 @@ def generate_random_string_loop(length):
 
 def get_time_for_chained(load, size, strings):
     """
-    Вычисляет среднее время вставкии в хеш таблицу 
+    Вычисляет среднее время вставкии в хеш таблицу
     реализованную методом цепочек
+
+    Args:
+        load: целевой коэффициент заполнения.
+        size: количество элементов для вставки.
+        strings: список ключей (строк) длины >= size для вставки.
+
+    Returns:
+        out: среднее время вставки всех элементов в миллисекундах,
+               усреднённое по нескольким прогонам.
     """
     measures = []
     for j in range(20):
-        table = Chaining_HashTable(initial_size=size, load=load)
+        table = ChainingHashTable(initial_size=size, load=load)
         start = timeit.default_timer()
         for i in range(size):
             table.insert(strings[i], i)
         end = timeit.default_timer()
         measures.append((end - start) * 1000)
-    return sum(measures) // 20
+    return sum(measures) / len(measures)
 
 
 def get_time_for_linear(load, size, strings):
     """
     Вычисляет среднее время вставкии в хеш таблицу
     открытой адресации линейной пробации
+
+    Args:
+        load: целевой коэффициент заполнения.
+        size: количество элементов для вставки.
+        strings: список ключей (строк) длины >= size для вставки.
+
+    Returns:
+        out: среднее время вставки всех элементов в миллисекундах,
+               усреднённое по нескольким прогонам.
     """
     measures = []
     for j in range(20):
-        table = Linear_HashTable(size=size, load=load)
+        table = LinearHashTable(size=size, load=load)
         start = timeit.default_timer()
         for i in range(size):
             table.insert(strings[i], i)
         end = timeit.default_timer()
-    measures.append((end - start) * 1000)
-    return sum(measures) // 20
+        measures.append((end - start) * 1000)
+    return sum(measures) / len(measures)
 
 
 def get_time_for_double(load, size, strings):
     """
     Вычисляет среднее время вставкии в хеш таблицу
     открытой адресации двойного хеширования
+
+    Args:
+        load: целевой коэффициент заполнения.
+        size: количество элементов для вставки.
+        strings: список ключей (строк) длины >= size для вставки.
+
+    Returns:
+        out: среднее время вставки всех элементов в миллисекундах,
+               усреднённое по нескольким прогонам.
     """
     measures = []
     for j in range(20):
@@ -794,14 +921,24 @@ def get_time_for_double(load, size, strings):
         for i in range(size):
             table.insert(strings[i], i)
         end = timeit.default_timer()
-    measures.append((end - start) * 1000)
-    return sum(measures) // 20
+        measures.append((end - start) * 1000)
+    return sum(measures) / len(measures)
 
 
 def measure_time(loades=[0.1, 0.5, 0.7, 0.9], size=1000):
     """
     Собирает результаты времени выполнения в словарь вида
     ["метод реализации"] - [список значений времени выполнения]
+
+    Args:
+        loades: список коэффициентов заполнения для тестирования.
+        size: количество элементов, вставляемых в
+            каждую таблицу при каждом замере.
+
+    Returns:
+        dict: словарь с ключами 'chain', 'linear', 'double' и значениями -
+              списками средних времени (в миллисекундах)
+              для каждого коэффициента заполнения.
     """
     strings = []
     chained_list = []
@@ -822,37 +959,40 @@ def measure_time(loades=[0.1, 0.5, 0.7, 0.9], size=1000):
     return result
 
 
-def Visualisation(loades=[0.1, 0.5, 0.7, 0.9], size=1000):
+def visualisation(loads=[0.1, 0.5, 0.7, 0.9], size=1000):
     """
     Визуализирует графики зависимости времени выполнения от
     коэффициента заполнения
+
+    Args:
+        loads: список коэффициентов заполнения для оси X.
+        size: количество элементов, вставляемых в каждой таблице для измерения.
     """
-    measures = measure_time(loades=loades, size=size)
+    measures = measure_time(loades=loads, size=size)
     chained_list = measures["chain"]
     linear_list = measures["linear"]
     double_list = measures["double"]
 
-    Create_plot(chained_list, loades,
-                "графики зависимости времени операций от коэффициента заполнения",
+    create_plot(chained_list, loads,
+                "графики зависимости времени от коэффициента заполнения",
                 "./report/chained_hashtable.png", label="chain")
-    Create_plot(linear_list, loades,
-                "графики зависимости времени операций от коэффициента заполнения",
+    create_plot(linear_list, loads,
+                "графики зависимости времени от коэффициента заполнения",
                 "./report/linear_hashtable.png", label="linear")
-    Create_plot(double_list, loades,
-                "графики зависимости времени операций от коэффициента заполнения",
+    create_plot(double_list, loads,
+                "графики зависимости времени от коэффициента заполнения",
                 "./report/double_hashtable.png", label="double")
 
 
-def Create_plot(data, sizes, title, path, label):
+def create_plot(data, sizes, title, path, label):
     """
     Строит и сохраняет график времени работы сортировок для одного типа данных.
-    Аргументы:
-        data: словарь {название метода: список времени}.
-        sizes: список размеров массивов.
-        title: строка — заголовок графика.
-        path: строка — путь для сохранения PNG-файла.
-    Возвращает:
-        None. Сохраняет график и отображает его.
+    Args:
+        data: список значений времени (ms) для каждой точки по оси X.
+        sizes: список коэффициентов заполнения (ось X).
+        title: заголовок графика.
+        path: путь для сохранения PNG-файла.
+        label: подпись кривой на графике.
     """
     plt.plot(sizes, data,
              marker="o", color="red", label=label)
@@ -860,8 +1000,10 @@ def Create_plot(data, sizes, title, path, label):
     plt.xlabel("коэффициент заполнения")
     plt.ylabel("Время выполнения ms")
     plt.title(title)
+    plt.legend(loc="upper left", title="Метод")
     plt.savefig(path, dpi=300, bbox_inches="tight")
     plt.show()
+
 ```
 
 ```PYTHON
@@ -871,11 +1013,11 @@ import modules.perfomance_analysis as perf_test
 from modules.hash_functions import simple_hash, polynomial_hash, djb2_hash
 import modules.HistCollision as hist
 
-perf_test.Visualisation(size=100000)
+perf_test.visualisation(size=100000)
 
-hist.Visualisation(simple_hash, func_name="Simple")
-hist.Visualisation(polynomial_hash, func_name="Polynomial")
-hist.Visualisation(djb2_hash, func_name="DJB2")
+hist.visualisation(simple_hash, func_name="Simple")
+hist.visualisation(polynomial_hash, func_name="Polynomial")
+hist.visualisation(djb2_hash, func_name="DJB2")
 
 # Характеристики вычислительной машины
 pc_info = """
@@ -886,7 +1028,6 @@ pc_info = """
 - Python: 3.12
 """
 print(pc_info)
-
 ```
 
 <image src="./report/chained_hashtable.png" style="display:block; margin: auto;">
@@ -900,11 +1041,6 @@ print(pc_info)
 - ОС: Windows 11
 - Python: 3.12
 ```
-
-
-
-
-
 
 
 

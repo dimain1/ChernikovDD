@@ -3,7 +3,7 @@
 import random
 import string
 import matplotlib.pyplot as plt
-from modules.hash_functions import simple_hash, polynomial_hash, djb2_hash
+from modules.hash_functions import djb2_hash
 
 
 class ChainHashTableByCollision:
@@ -12,6 +12,7 @@ class ChainHashTableByCollision:
     цепочек под посчёт распределения
     колизий
     """
+
     def __init__(self, size=100, hash_func=djb2_hash):
         self.size = size
         self.table = [[] for _ in range(size)]
@@ -19,6 +20,14 @@ class ChainHashTableByCollision:
         self._hash = hash_func
 
     def insert(self, key):
+        """
+        Вставляет элемент с ключом и значением в таблицу.
+        Если ключ уже существует, обновляет значение.
+
+        Args:
+            key: Ключ значения для вставки
+            value: Значение для вставки
+        """
         index = self._hash(key) % self.size
         chain = self.table[index]
         if len(chain) > 0:
@@ -28,6 +37,9 @@ class ChainHashTableByCollision:
             self._resize()
 
     def _resize(self):
+        """
+        Увеличивает размер внутренней таблицы и перераспределяет ключи.
+        """
         old_table = self.table
         self.size *= 2
         self.table = [[] for _ in range(self.size)]
@@ -42,6 +54,7 @@ class LinearProbingHashTableByCollision:
     адресации с линейной пробацией под посчёт распределения
     колизий
     """
+
     def __init__(self, size=100, hash_func=djb2_hash):
         self.size = size
         self.table = [None] * size
@@ -49,6 +62,13 @@ class LinearProbingHashTableByCollision:
         self._hash = hash_func
 
     def insert(self, key):
+        """
+        Вставляет ключ в таблицу с линейным пробированием.
+        При столкновении считает количество шагов до свободной ячейки.
+
+        Args:
+            key: Ключ (строка) для вставки.
+        """
         index = self._hash(key) % self.size
         start = index
         steps = 0
@@ -63,7 +83,15 @@ class LinearProbingHashTableByCollision:
 
 
 def next_prime(n):
-    """Возвращает простое число больше n"""
+    """
+    Возвращает простое число >= n.
+
+    Args:
+        n: число больше которого выбирают простое.
+
+    Returns:
+        n: Возвращает простое число большее n
+    """
     def is_prime(num):
         if num < 2:
             return False
@@ -87,6 +115,7 @@ class DoubleHashingHashTableByCollision:
     адресации с двойным хешированием под посчёт распределения
     колизий
     """
+
     def __init__(self, size=100, hash_func1=djb2_hash,
                  hash_func2=djb2_hash):
         self.size = next_prime(size)
@@ -96,6 +125,14 @@ class DoubleHashingHashTableByCollision:
         self._hash2 = hash_func2
 
     def insert(self, key):
+        """
+        Вставляет ключ в таблицу с двойным хешированием.
+        Использует вторую хеш-функцию для вычисления шага пробирования.
+        При коллизиях фиксирует число шагов до свободной ячейки.
+
+        Args:
+            key: Ключ (строка) для вставки.
+        """
         checked_ind = []
         index = self._hash1(key) % self.size
 
@@ -119,6 +156,12 @@ class DoubleHashingHashTableByCollision:
 def generate_random_string_loop(length):
     """
     Генерирует рандомную строку длины length
+
+    Args:
+        length: длина строки для генерации
+
+    Returns:
+        random_string: Сгенерированная строка
     """
     characters = string.ascii_letters + string.digits
     random_string = ""
@@ -127,10 +170,15 @@ def generate_random_string_loop(length):
     return random_string
 
 
-def Visualisation(hash_func, N=2000, func_name="table"):
+def visualisation(hash_func, N=2000, func_name="table"):
     """
     Собирает данные по распределению колизий и вызывает
     функцию по созданию графиков
+
+    Args:
+        hash_func: Хеш функция для которой производится замер
+        N: Размер хеш-таблиц и количество элементов
+        func_name: Наименование функции для графика
     """
 
     keys = [generate_random_string_loop(10) for _ in range(N)]
@@ -154,6 +202,10 @@ def create_plot(data, path):
     """
     Создаёт рисунок по пути path, на котором изображены 3 графика
     зависимости распределения колизий от хеш-функции
+
+    Args:
+        data: Списко колизий для постройки гистограммы
+        path: Путь для сохранения графика
     """
     plt.figure(figsize=(14, 5))
 

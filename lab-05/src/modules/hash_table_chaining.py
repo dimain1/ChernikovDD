@@ -7,6 +7,7 @@ from modules.hash_functions import polynomial_hash
 class Node:
     """
     Класс узла односвязного списка.
+
     Attributes:
         key: Ключ элемента.
         value: Значение элемента.
@@ -19,17 +20,22 @@ class Node:
         self.next = None
 
 
-class Chaining_HashTable:
+class ChainingHashTable:
     """
     Класс хеш-таблицы методом цепочек с динамическим масштабированием.
     Поддерживает вставку, поиск и удаление элементов.
+
+
     """
 
     def __init__(self, initial_size=8, load=0.7, hash_func=polynomial_hash):
         """
         Инициализация хеш-таблицы.
-        Args:
-            initial_size: Начальный размер таблицы.
+
+         Args:
+            initial_size : Начальный размер внутреннего массива;
+            load : Порог коэффициента заполнения.
+            hash_func : Функция хеширования.
         """
         self.size = initial_size
         self.count = 0
@@ -81,6 +87,9 @@ class Chaining_HashTable:
         Args:
             key: Ключ элемента.
             value: Значение элемента.
+
+        Returns:
+            None
         """
         if self.count / self.size > self.load:
             self._resize()
@@ -121,8 +130,10 @@ class Chaining_HashTable:
     def remove(self, key):
         """
         Удаляет элемент по ключу.
+
         Args:
             key: Ключ элемента для удаления.
+
         Returns:
             True, если элемент удалён, иначе False.
         """
@@ -157,4 +168,3 @@ class Chaining_HashTable:
                 print(f"({current.key}: {current.value})", end=" -> ")
                 current = current.next
             print("None")
-
