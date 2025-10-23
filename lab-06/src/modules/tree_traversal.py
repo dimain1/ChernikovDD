@@ -5,6 +5,10 @@ def inorder_recursive(node, visit=print):
     """
     Рекурсивный in-order обход: left, root, right.
     Временная сложность: O(n), Пространственная: O(h) стек рекурсии.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     if node is None:
         return
@@ -17,6 +21,10 @@ def preorder_recursive(node, visit=print):
     """
     Рекурсивный pre-order обход: root, left, right.
     Временная сложность: O(n), Пространственная: O(h) стек рекурсии.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     if node is None:
         return
@@ -29,6 +37,10 @@ def postorder_recursive(node, visit=print):
     """
     Рекурсивный post-order обход: left, right, root.
     Временная сложность: O(n), Пространственная: O(h) стек рекурсии.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     if node is None:
         return
@@ -41,6 +53,10 @@ def inorder_iterative(node, visit=print):
     """
     Итеративный in-order обход с использованием явного стека.
     Временная сложность: O(n), Пространственная: O(h) для стека.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     stack = []
     current = node

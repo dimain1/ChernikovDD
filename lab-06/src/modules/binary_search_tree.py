@@ -1,6 +1,10 @@
 # binary_search_tree.py
 
 class TreeNode:
+    """
+    Класс отвечающий за реализацию узлов бинарного дерева.
+    """
+
     def __init__(self, value, left=None, right=None):
         self.value = value
         self.left = left
@@ -8,16 +12,34 @@ class TreeNode:
 
 
 class BinarySearchTree:
+    """
+    Класс реализующий структуру данных бинарное дерево.
+    Поддерживает визуализацию, проверку валидности и получение высоты
+    """
+
     def __init__(self, root=None):
         self.root = root
 
     def insert(self, value):
         """
         Вставляет значение в дерево.
+
+        Args:
+            value: Значение для вставки в дерево
         """
         self.root = self._insert_rec(self.root, value)
 
     def _insert_rec(self, node, value):
+        """
+        Рекурсивно вставляет значение в дерево.
+
+        Args:
+            node: Текущий узел дерева
+            value: Значение для вставки
+
+        Returns:
+            node: Обновленный узел дерева
+        """
         if node is None:
             return TreeNode(value)
         if value == node.value:
@@ -33,10 +55,26 @@ class BinarySearchTree:
     def search(self, value):
         """
         Ищет значение в дереве, возвращает узел или None.
+
+        Args:
+            value: Искомое значение
+
+        Returns:
+            node: Найденный узел или None, если значение не найдено
         """
         return self._search_rec(self.root, value)
 
     def _search_rec(self, node, value):
+        """
+        Рекурсивный поиск значения в дереве.
+
+        Args:
+            node: Текущий узел дерева
+            value: Искомое значение
+
+        Returns:
+            node: Найденный узел или None, если значение не найдено
+        """
         if node is None:
             return None
         if value == node.value:
@@ -51,6 +89,12 @@ class BinarySearchTree:
         """
         Удаляет узел со значением value из дерева.
         Возвращает True, если удалено, иначе False.
+
+        Args:
+            value: Значение для удаления
+
+        Returns:
+            deleted: Флаг успешности удаления
         """
         self.root, deleted = self._delete_rec(self.root, value)
         return deleted
@@ -58,6 +102,17 @@ class BinarySearchTree:
     # Среднее время: O(log n), Худшее время: O(n)
 
     def _delete_rec(self, node, value):
+        """
+        Рекурсивное удаление значения из дерева.
+
+        Args:
+            node: Текущий узел дерева
+            value: Значение для удаления
+
+        Returns:
+            node: Обновленный узел дерева
+            deleted: Флаг успешности удаления
+        """
         if node is None:
             return node, False
 
@@ -86,6 +141,12 @@ class BinarySearchTree:
     def find_min(self, node):
         """
         Находит минимальный узел в поддереве node.
+
+        Args:
+            node: Корень поддерева
+
+        Returns:
+            node: Узел с минимальным значением
         """
         current = node
         if current is None:
@@ -99,6 +160,12 @@ class BinarySearchTree:
     def find_max(self, node):
         """
         Находит максимальный узел в поддереве node.
+
+        Args:
+            node: Корень поддерева
+
+        Returns:
+            node: Узел с максимальным значением
         """
         current = node
         if current is None:
@@ -113,6 +180,10 @@ class BinarySearchTree:
         """
         Простая текстовая визуализация дерева (отступами).
         Печатает дерево повернутым: правые поддеревья сверху, левыe снизу.
+
+        Args:
+            node: Корень дерева/поддерева для визуализации
+            level: Текущий уровень отступа
         """
         if node is None:
             node = self.root
@@ -130,6 +201,9 @@ class BinarySearchTree:
         """
         Проверяет, является ли дерево корректным BST.
         Временная сложность: O(n), Пространственная: O(h) рекурсивный стек.
+
+        Returns:
+            out: True если дерево является корректным BST, иначе False
         """
         def helper(node, low, high):
             if node is None:
@@ -151,6 +225,12 @@ class BinarySearchTree:
         Вычисляет высоту дерева/поддерева (количество узлов в самом длинном
         пути от node до листа). Возвращает 0 для пустого поддерева.
         Временная сложность: O(n), Пространственная: O(h).
+
+        Args:
+            node: Корень дерева/поддерева
+
+        Returns:
+            height: Высота дерева/поддерева
         """
         if node is None:
             return 0

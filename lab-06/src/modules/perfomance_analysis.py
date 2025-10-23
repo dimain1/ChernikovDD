@@ -8,6 +8,16 @@ from modules.binary_search_tree import BinarySearchTree
 
 
 def build_tree(n, balanced=True):
+    """
+    Создает бинарное дерево поиска заданного размера.
+
+    Args:
+        n: Количество узлов в дереве
+        balanced: Флаг создания сбалансированного дерева
+
+    Returns:
+        tree: Созданное бинарное дерево поиска
+    """
     values = list(range(n))
     if balanced:
         random.shuffle(values)
@@ -20,6 +30,13 @@ def build_tree(n, balanced=True):
 def time_insert(n, balanced=True):
     """
     Измеряет время выполнения для операции вставки в бинарное дерево
+
+    Args:
+        n: Размер дерева
+        balanced: Флаг использования сбалансированного дерева
+
+    Returns:
+        out: Время выполнения вставки в миллисекундах
     """
     tree = build_tree(n, balanced=balanced)
 
@@ -34,6 +51,12 @@ def measure_time(sizes):
     """
     Вычисляет среднее время выполнения для сбалансированного и
     вырожденного бинарного дерева.
+
+    Args:
+        sizes: Список размеров деревьев для тестирования
+
+    Returns:
+        res: Словарь с результатами измерений для разных размеров деревьев
     """
     res = {'sizes': list(sizes), 'balanced': [], 'degenerate': []}
 
@@ -44,10 +67,14 @@ def measure_time(sizes):
     return res
 
 
-def Visualisation(sizes, out_png=None):
+def visualisation(sizes, out_png=None):
     """
     Визуализирует график зависимости времени выполнения
     от размера бинарного дерева
+
+    Args:
+        sizes: Список размеров деревьев для визуализации
+        out_png: Путь к файлу для сохранения графика
     """
     series = measure_time(sizes)
     x = series['sizes']

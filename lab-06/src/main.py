@@ -3,7 +3,7 @@
 from modules.binary_search_tree import BinarySearchTree
 from modules.analysis import run_experiment
 import sys
-from modules.perfomance_analysis import Visualisation
+from modules.perfomance_analysis import visualisation
 
 # Tree visualize
 tree = BinarySearchTree()
@@ -33,7 +33,7 @@ res = run_experiment(
 
 # Perf_analysis
 sizes = [100, 1000, 5000, 10000, 25000]
-Visualisation(sizes, out_png="./report/insert.png")
+visualisation(sizes, out_png="./report/insert.png")
 
 
 # Характеристики вычислительной машины

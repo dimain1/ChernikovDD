@@ -36,6 +36,12 @@ from modules.binary_search_tree import BinarySearchTree
 def build_random_tree(size):
     """
     Генерирует сбалансированное бинарное дерево
+
+    Args:
+        size: Количество узлов в дереве
+
+    Returns:
+        tree: Сбалансированное бинарное дерево поиска
     """
     values = list(range(size))
     random.shuffle(values)
@@ -48,6 +54,12 @@ def build_random_tree(size):
 def build_sorted_tree(size):
     """
     Генерирует вырожденное бинарное дерево
+
+    Args:
+        size: Количество узлов в дереве
+
+    Returns:
+        tree: Вырожденное бинарное дерево поиска
     """
     values = list(range(size))
     tree = BinarySearchTree()
@@ -60,6 +72,14 @@ def measure_search_time(tree, size, trials=1000):
     """
     Измеряет время выполнения 1000 операций поиска в бинарном
     дереве
+
+    Args:
+        tree: Бинарное дерево поиска
+        size: Размер дерева
+        trials: Количество операций поиска
+
+    Returns:
+        out: Время выполнения всех операций поиска в секундах
     """
     keys = [random.randrange(size) for _ in range(trials)]
     start = time.perf_counter()
@@ -73,6 +93,15 @@ def run_experiment(sizes, trials_per_size=1000, repeats=5):
     """
     Измеряет среднее время выполнения операций поиска для сбалансированного
     и вырожденного бинарного дерева
+
+    Args:
+        sizes: Список размеров деревьев для тестирования
+        trials_per_size: Количество операций поиска для каждого размера
+        repeats: Количество повторений эксперимента для усреднения
+
+    Returns:
+        results: Список кортежей (размер, время_сбалансированного,
+                время_вырожденного)
     """
     results = []
     for n in sizes:
@@ -103,6 +132,10 @@ def run_experiment(sizes, trials_per_size=1000, repeats=5):
 # binary_search_tree.py
 
 class TreeNode:
+    """
+    Класс отвечающий за реализацию узлов бинарного дерева.
+    """
+
     def __init__(self, value, left=None, right=None):
         self.value = value
         self.left = left
@@ -110,16 +143,34 @@ class TreeNode:
 
 
 class BinarySearchTree:
+    """
+    Класс реализующий структуру данных бинарное дерево.
+    Поддерживает визуализацию, проверку валидности и получение высоты
+    """
+
     def __init__(self, root=None):
         self.root = root
 
     def insert(self, value):
         """
         Вставляет значение в дерево.
+
+        Args:
+            value: Значение для вставки в дерево
         """
         self.root = self._insert_rec(self.root, value)
 
     def _insert_rec(self, node, value):
+        """
+        Рекурсивно вставляет значение в дерево.
+
+        Args:
+            node: Текущий узел дерева
+            value: Значение для вставки
+
+        Returns:
+            node: Обновленный узел дерева
+        """
         if node is None:
             return TreeNode(value)
         if value == node.value:
@@ -135,10 +186,26 @@ class BinarySearchTree:
     def search(self, value):
         """
         Ищет значение в дереве, возвращает узел или None.
+
+        Args:
+            value: Искомое значение
+
+        Returns:
+            node: Найденный узел или None, если значение не найдено
         """
         return self._search_rec(self.root, value)
 
     def _search_rec(self, node, value):
+        """
+        Рекурсивный поиск значения в дереве.
+
+        Args:
+            node: Текущий узел дерева
+            value: Искомое значение
+
+        Returns:
+            node: Найденный узел или None, если значение не найдено
+        """
         if node is None:
             return None
         if value == node.value:
@@ -153,6 +220,12 @@ class BinarySearchTree:
         """
         Удаляет узел со значением value из дерева.
         Возвращает True, если удалено, иначе False.
+
+        Args:
+            value: Значение для удаления
+
+        Returns:
+            deleted: Флаг успешности удаления
         """
         self.root, deleted = self._delete_rec(self.root, value)
         return deleted
@@ -160,6 +233,17 @@ class BinarySearchTree:
     # Среднее время: O(log n), Худшее время: O(n)
 
     def _delete_rec(self, node, value):
+        """
+        Рекурсивное удаление значения из дерева.
+
+        Args:
+            node: Текущий узел дерева
+            value: Значение для удаления
+
+        Returns:
+            node: Обновленный узел дерева
+            deleted: Флаг успешности удаления
+        """
         if node is None:
             return node, False
 
@@ -188,6 +272,12 @@ class BinarySearchTree:
     def find_min(self, node):
         """
         Находит минимальный узел в поддереве node.
+
+        Args:
+            node: Корень поддерева
+
+        Returns:
+            node: Узел с минимальным значением
         """
         current = node
         if current is None:
@@ -201,6 +291,12 @@ class BinarySearchTree:
     def find_max(self, node):
         """
         Находит максимальный узел в поддереве node.
+
+        Args:
+            node: Корень поддерева
+
+        Returns:
+            node: Узел с максимальным значением
         """
         current = node
         if current is None:
@@ -215,6 +311,10 @@ class BinarySearchTree:
         """
         Простая текстовая визуализация дерева (отступами).
         Печатает дерево повернутым: правые поддеревья сверху, левыe снизу.
+
+        Args:
+            node: Корень дерева/поддерева для визуализации
+            level: Текущий уровень отступа
         """
         if node is None:
             node = self.root
@@ -232,6 +332,9 @@ class BinarySearchTree:
         """
         Проверяет, является ли дерево корректным BST.
         Временная сложность: O(n), Пространственная: O(h) рекурсивный стек.
+
+        Returns:
+            out: True если дерево является корректным BST, иначе False
         """
         def helper(node, low, high):
             if node is None:
@@ -253,6 +356,12 @@ class BinarySearchTree:
         Вычисляет высоту дерева/поддерева (количество узлов в самом длинном
         пути от node до листа). Возвращает 0 для пустого поддерева.
         Временная сложность: O(n), Пространственная: O(h).
+
+        Args:
+            node: Корень дерева/поддерева
+
+        Returns:
+            height: Высота дерева/поддерева
         """
         if node is None:
             return 0
@@ -273,6 +382,16 @@ from modules.binary_search_tree import BinarySearchTree
 
 
 def build_tree(n, balanced=True):
+    """
+    Создает бинарное дерево поиска заданного размера.
+
+    Args:
+        n: Количество узлов в дереве
+        balanced: Флаг создания сбалансированного дерева
+
+    Returns:
+        tree: Созданное бинарное дерево поиска
+    """
     values = list(range(n))
     if balanced:
         random.shuffle(values)
@@ -285,6 +404,13 @@ def build_tree(n, balanced=True):
 def time_insert(n, balanced=True):
     """
     Измеряет время выполнения для операции вставки в бинарное дерево
+
+    Args:
+        n: Размер дерева
+        balanced: Флаг использования сбалансированного дерева
+
+    Returns:
+        out: Время выполнения вставки в миллисекундах
     """
     tree = build_tree(n, balanced=balanced)
 
@@ -299,6 +425,12 @@ def measure_time(sizes):
     """
     Вычисляет среднее время выполнения для сбалансированного и
     вырожденного бинарного дерева.
+
+    Args:
+        sizes: Список размеров деревьев для тестирования
+
+    Returns:
+        res: Словарь с результатами измерений для разных размеров деревьев
     """
     res = {'sizes': list(sizes), 'balanced': [], 'degenerate': []}
 
@@ -309,10 +441,14 @@ def measure_time(sizes):
     return res
 
 
-def Visualisation(sizes, out_png=None):
+def visualisation(sizes, out_png=None):
     """
     Визуализирует график зависимости времени выполнения
     от размера бинарного дерева
+
+    Args:
+        sizes: Список размеров деревьев для визуализации
+        out_png: Путь к файлу для сохранения графика
     """
     series = measure_time(sizes)
     x = series['sizes']
@@ -337,6 +473,10 @@ def inorder_recursive(node, visit=print):
     """
     Рекурсивный in-order обход: left, root, right.
     Временная сложность: O(n), Пространственная: O(h) стек рекурсии.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     if node is None:
         return
@@ -349,6 +489,10 @@ def preorder_recursive(node, visit=print):
     """
     Рекурсивный pre-order обход: root, left, right.
     Временная сложность: O(n), Пространственная: O(h) стек рекурсии.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     if node is None:
         return
@@ -361,6 +505,10 @@ def postorder_recursive(node, visit=print):
     """
     Рекурсивный post-order обход: left, right, root.
     Временная сложность: O(n), Пространственная: O(h) стек рекурсии.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     if node is None:
         return
@@ -373,6 +521,10 @@ def inorder_iterative(node, visit=print):
     """
     Итеративный in-order обход с использованием явного стека.
     Временная сложность: O(n), Пространственная: O(h) для стека.
+
+    Args:
+        node: Корень дерева/поддерева для обхода
+        visit: Функция, применяемая к значению каждого узла
     """
     stack = []
     current = node
@@ -392,7 +544,7 @@ def inorder_iterative(node, visit=print):
 from modules.binary_search_tree import BinarySearchTree
 from modules.analysis import run_experiment
 import sys
-from modules.perfomance_analysis import Visualisation
+from modules.perfomance_analysis import visualisation
 
 # Tree visualize
 tree = BinarySearchTree()
@@ -422,7 +574,7 @@ res = run_experiment(
 
 # Perf_analysis
 sizes = [100, 1000, 5000, 10000, 25000]
-Visualisation(sizes, out_png="./report/insert.png")
+visualisation(sizes, out_png="./report/insert.png")
 
 
 # Характеристики вычислительной машины
