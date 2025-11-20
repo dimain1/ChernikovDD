@@ -303,6 +303,24 @@ def print_fib_table(dp):
         print(val, end="  ")
     print("\n")
 
+def knapsack_1d(weights, values, capacity):
+    """
+    Оптимизированная версия 0/1 рюкзака.
+    Используется один массив dp[w].
+
+    dp[w] — максимальная стоимость при вместимости w.
+
+    Время:  O(n * W)
+    Память: O(W)
+    """
+    n = len(values)
+    dp = [0] * (capacity + 1)
+
+    for i in range(n):
+        for w in range(capacity, weights[i] - 1, -1):  # обратный проход
+            dp[w] = max(dp[w], values[i] + dp[w - weights[i]])
+
+    return dp[capacity]
 ```
 
 ```PYTHON
